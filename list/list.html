@@ -1,0 +1,35 @@
+<h1 class="page-header">{{title}}</h1>
+<div class="list-group">
+    <a ng-repeat="movie in subjects" href="#/search/subject/{{movie.id}}" class="list-group-item">
+        <span class="badge">评分：{{movie.rating.average}}</span>
+        <div class="media">
+            <div class="media-left" href="#">
+                <img ng-src={{movie.images.small}}>
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading">{{movie.title}}</h4>
+                <p>导演:<span ng-repeat="director in movie.directors">{{director.name}} {{$last?'':'、'}}</span></p>
+                <p>类型:{{movie.genres.join('、')}}</p>
+            </div>
+        </div>
+    </a>
+</div>
+<div class="mask" ng-hide="subjects.length">
+    <div class="spinner">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+    </div>
+</div>
+<div ng-show="subjects.length">
+    <p>共{{total}}部电影,共{{totalPage}}页</p>
+    <p class="page-p">第{{page}}页</p>
+    <nav>
+        <ul class="pager">
+            <li ng-class="{disabled:currentPage==1}"><a ng-click="hundlePage(currentPage-1)">上一页</a></li>
+            <li ng-class="{disabled:currentPage==totalPage}"><a ng-click="hundlePage(currentPage+1)">下一页</a></li>
+        </ul>
+    </nav>
+</div>
